@@ -1,0 +1,278 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    Laboratory Information System (LIS System)
+                </h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex-auto p-6 sm:p-10">
+
+        <div class="max-w-3xl">
+
+           
+
+            <!-- Horizontal stepper -->
+            <div class="mt-16 mb-8 text-3xl font-bold">COVID-19 Testing Registration and Virtual Check-in </div>
+
+            <form
+                class="p-4 bg-card shadow rounded overflow-hidden"
+                [formGroup]="horizontalStepperForm">
+                <mat-vertical-stepper
+                    [linear]="true"
+                    #horizontalStepper>
+                    <mat-step
+                        [formGroupName]="'step1'"
+                        [stepControl]="horizontalStepperForm.get('step1')"
+                        #horizontalStepperStep1>
+                        <ng-template matStepLabel>Basic information</ng-template>
+                        <p class="my-6 font-medium">
+                            Fill in your basic information to let us know your preferences
+                        </p>
+                        <div class="flex">
+                            <mat-form-field class="flex-auto">
+                                <input
+                                    matInput
+                                    [formControlName]="'email'"
+                                    [placeholder]="'Last Name'"
+                                    >
+                                <mat-icon
+                                    class="icon-size-5"
+                                    matPrefix
+                                    [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+                            </mat-form-field>
+                        </div>
+                        <div class="flex flex-col gt-xs:flex-row">
+                            <mat-form-field class="flex-auto">
+                                <input
+                                    matInput
+                                    [formControlName]="'email'"
+                                    [placeholder]="'First Name'"
+                                    >
+                                <mat-icon
+                                    class="icon-size-5"
+                                    matPrefix
+                                    [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+                            </mat-form-field>
+                            <mat-form-field class="flex-auto gt-xs:pl-3">
+                                <mat-select
+                                    [formControlName]="'language'"
+                                    [placeholder]="'Gender'"
+                                    >
+                                    <mat-option value="language-1">Male</mat-option>
+                                    <mat-option value="language-2">Female</mat-option>
+                                    <mat-option value="language-3">Other</mat-option>
+                                </mat-select>
+                                <mat-icon
+                                    class="icon-size-5"
+                                    matPrefix
+                                    [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+                            </mat-form-field>
+                            <mat-form-field
+                                 
+                                 class="flex-auto">
+                                 
+                                 <input
+                                     matInput
+                                     [placeholder]="'Date of Birth'"
+                                     [matDatepicker]="picker1">
+                                 <mat-datepicker-toggle
+                                    matPrefix
+                                     [for]="picker1">
+                                    </mat-datepicker-toggle>
+                                 <mat-datepicker #picker1>
+
+                                 </mat-datepicker>
+                            </mat-form-field>
+                            <mat-form-field class="flex-auto">
+                                <input
+                                    matInput
+                                    [formControlName]="'email'"
+                                    [placeholder]="'Race'"
+                                    >
+                                <mat-icon
+                                    class="icon-size-5"
+                                    matPrefix
+                                    [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+                            </mat-form-field>
+                        </div>
+                        <div class="flex justify-end">
+                            <button
+                                class="px-8"
+                                mat-flat-button
+                                [color]="'primary'"
+                                [disabled]="horizontalStepperStep1.stepControl.pristine || horizontalStepperStep1.stepControl.invalid"
+                                type="button"
+                                matStepperNext>
+                                Next
+                            </button>
+                        </div>
+                    </mat-step>
+
+                    <mat-step
+                        [formGroupName]="'step2'"
+                        [stepControl]="horizontalStepperForm.get('step2')"
+                        #horizontalStepperStep2>
+                        <ng-template matStepLabel>Address information</ng-template>
+                        <p class="my-6 font-medium">
+                            People here will get to know you with this information
+                        </p>
+                        <div class="flex flex-col gt-xs:flex-row">
+                            <mat-form-field class="flex-auto">
+                                <input
+                                    matInput
+                                    [formControlName]="'email'"
+                                    [placeholder]="'Phone Number'"
+                                    >
+                                <mat-icon
+                                    class="icon-size-5"
+                                    matPrefix
+                                    [svgIcon]="'heroicons_solid:phone'"></mat-icon>
+                            </mat-form-field>
+                            <mat-form-field
+                                 
+                                class="fuse-mat-textarea flex-auto">
+                                <mat-label>Address</mat-label>
+                                <textarea
+                                    matInput
+                                    [rows]="3"
+                                    matTextareaAutosize></textarea>
+                                <mat-icon
+                                    class="icon-size-5"
+                                    matPrefix
+                                    [svgIcon]="'heroicons_solid:location-marker'"></mat-icon>
+                            </mat-form-field>
+                            <mat-form-field class="flex-auto">
+                                <input
+                                    matInput
+                                    [formControlName]="'userName'"
+                                    [placeholder]="'City'"
+                                    >
+                                 
+                            </mat-form-field>
+                            <mat-form-field class="flex-auto">
+                                <input
+                                    matInput
+                                    [formControlName]="'userName'"
+                                    [placeholder]="'State'"
+                                    >
+                                 
+                            </mat-form-field>
+                            <mat-form-field class="flex-auto">
+                                <input
+                                    matInput
+                                    [formControlName]="'userName'"
+                                    [placeholder]="'Zip Code'"
+                                    >
+                                 
+                            </mat-form-field>
+                        </div>
+                         
+                    </mat-step>
+
+                    <mat-step
+                        [formGroupName]="'step3'"
+                        [stepControl]="horizontalStepperForm.get('step2')"
+                        #horizontalStepperStep3>
+                        <ng-template matStepLabel>Test Details</ng-template>
+                        <p class="my-6 font-medium">
+                            People here will get to know you with this information
+                        </p>
+                        <div class="flex flex-col gt-sm:flex-row">
+                            <div class="flex flex-col">
+                                <span class="font-semibold mb-2">Select Tests</span>
+                                <div class="flex flex-col">
+                                    <mat-checkbox
+                                        class="mb-2"
+                                        [checked]="true"
+                                        [color]="'primary'">
+                                        Test 1
+                                    </mat-checkbox>
+                                    <mat-checkbox
+                                        class="mb-2"
+                                        [color]="'primary'">
+                                        Test 2
+                                    </mat-checkbox>
+                                    <mat-checkbox
+                                        [checked]="true"
+                                        [color]="'primary'">
+                                        Test 3
+                                    </mat-checkbox>
+                                </div>
+                            </div>
+                            <div class="flex flex-col mt-8 gt-sm:mt-0 gt-sm:ml-16">
+                                <mat-form-field
+                                 
+                                 class="flex-auto">
+                                 
+                                 <input
+                                     matInput
+                                     [placeholder]="'Test Collected at?'"
+                                     [matDatepicker]="picker2">
+                                 <mat-datepicker-toggle
+                                    matPrefix
+                                     [for]="picker2">
+                                    </mat-datepicker-toggle>
+                                 <mat-datepicker #picker2>
+
+                                 </mat-datepicker>
+                            </mat-form-field>
+                            </div>
+                        </div>
+                         
+                    </mat-step>
+                     <mat-step
+                        [formGroupName]="'step3'"
+                        [stepControl]="horizontalStepperForm.get('step2')"
+                        #horizontalStepperStep3>
+                        <ng-template matStepLabel>Insurance </ng-template>
+                        <p class="my-6 font-medium">
+                            People here will get to know you with this information
+                        </p>
+                        <div class="flex flex-col gt-xs:flex-row">
+                            <mat-form-field class="flex-auto">
+                                <input
+                                    matInput
+                                    [formControlName]="'email'"
+                                    [placeholder]="'Insurance ID'"
+                                    >
+                                <mat-icon
+                                    class="icon-size-5"
+                                    matPrefix
+                                    [svgIcon]="'heroicons_solid:identification'"></mat-icon>
+                            </mat-form-field>
+                            <mat-form-field class="flex-auto gt-xs:pl-3">
+                                <mat-select
+                                    [formControlName]="'language'"
+                                    [placeholder]="'Relationship to Insured '"
+                                    >
+                                    <mat-option value="language-1">Male</mat-option>
+                                    <mat-option value="language-2">Female</mat-option>
+                                    <mat-option value="language-3">Other</mat-option>
+                                </mat-select>
+                                <mat-icon
+                                    class="icon-size-5"
+                                    matPrefix
+                                    [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+                            </mat-form-field>
+                            </div>
+                         
+                    </mat-step>
+                </mat-vertical-stepper>
+            </form>
+
+             
+
+        </div>
+
+    </div>
+
+</div>
