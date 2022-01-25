@@ -27,7 +27,9 @@ import { FormsService } from './forms.service';
 import { SearchFilterPipe } from 'app/shared/pipes';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { NgxPaginationModule } from 'ngx-pagination';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+
 @NgModule({
     declarations: [
         ContactsComponent,
@@ -40,10 +42,11 @@ import { NgxPaginationModule } from 'ngx-pagination';
         MatButtonModule,
         MatCheckboxModule,
         MatDatepickerModule,
+        MatSortModule,
         MatSnackBarModule,
         MatDividerModule,
         MatFormFieldModule,
-        NgxPaginationModule,
+        MatPaginatorModule,
         MatIconModule,
         MatInputModule,
         MatMenuModule,

@@ -21,7 +21,8 @@ export class UserComponent implements OnInit, OnDestroy
 
     @Input() showAvatar: boolean = true;
     user: User;
-
+    isSuperAdmin: any;
+    signedEmail: any;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
     /**
@@ -44,6 +45,8 @@ export class UserComponent implements OnInit, OnDestroy
      */
     ngOnInit(): void
     {
+        this.signedEmail = JSON.parse(localStorage.getItem('userData')).email;
+        this.isSuperAdmin = JSON.parse(localStorage.getItem('userData')).email === 'admin@mkcovid19.com';
         // Subscribe to user changes
         this._userService.user$
             .pipe(takeUntil(this._unsubscribeAll))

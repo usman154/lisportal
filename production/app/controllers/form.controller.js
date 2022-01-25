@@ -1,9 +1,8 @@
 const db = require("../models");
 const Form = db.form;
 const generateReport = require("../../generateReport.js");
-const EmailSender = require('../utilities/notification.service.js');
-const utils = require('../utilities/libs/utils');
-const SIZE_ORDER_ID = 10;
+const EmailSender = require("../utilities/notification.service.js");
+const utils = require("../utilities/libs/utils");
 
 // Create and Save a new form
 exports.create = (req, res) => {
@@ -16,7 +15,18 @@ exports.create = (req, res) => {
   }, {});
   // Create a form
   mappedData.report_status = "pending";
-  mappedData.order_id = `MK-${new Date().valueOf()}`
+  mappedData.order_id = `MK-${new Date().valueOf()}`;
+  const time = utils.convertTime12to24(
+    mappedData.collection_time.timeInput + " " + mappedData.collection_time.ampm
+  );
+  const date = new Date(
+    mappedData.collection_date.year,
+    mappedData.collection_date.month - 1,
+    mappedData.collection_date.day,
+    time.hours,
+    time.minutes
+  );
+  mappedData.collectionTimeStamp = date;
   const form = new Form(mappedData);
 
   // Save form in the database
@@ -34,22 +44,31 @@ exports.create = (req, res) => {
 
 // Retrieve all forms from the database.
 exports.findAll = (req, res) => {
-
-  const { page, size, title } = req.query;
-  const condition = title
-    ? { title: { $regex: new RegExp(title), $options: "i" } }
+  const { page, size, name, filter, start, end } = req.query;
+  const condition = name
+    ? { first_name: { $regex: new RegExp(name), $options: "i" } }
     : {};
-
-  const { limit, offset } = getPagination(page, size);
-  ///
-  const filter = req.query.filter;
-
-  let query = {};
-  if (filter != "all") {
-    query = { report_status: filter };
+  
+  const { limit, offset } = utils.getPagination(page, size);
+  if (filter != "all" && filter !='positive' && filter !='negative') {
+    condition.report_status = filter;
+  }
+  if(filter == 'positive' || filter == 'negative'){
+    condition['test_result'] = filter;
+  }
+  if (start && end) {
+    let endofDay = new Date(end);
+    endofDay.setHours(23, 59, 59);
+    condition["collection_timeStamp"] = {
+      $gte: new Date(start),
+      $lte: endofDay,
+    };
+  }
+  if(req.userInfo && req.userInfo.email !='admin@mkcovid19.com'){
+    condition['location'] = req.userInfo.location;
   }
 
-  Form.find(query)
+  Form.paginate(condition, { offset, limit })
     .then((data) => {
       res.send(data);
     })
@@ -85,7 +104,7 @@ exports.update = (req, res) => {
 
   const id = req.params.id;
   delete req.body._id;
-  Form.findOneAndUpdate({_id: id}, req.body, { new: true })
+  Form.findOneAndUpdate({ _id: id }, req.body, { new: true })
     .then((data) => {
       if (!data) {
         res.status(404).send({
@@ -139,18 +158,7 @@ exports.deleteAll = (req, res) => {
     });
 };
 
-// Find all published forms
-exports.findAllPublished = (req, res) => {
-  Form.find({ published: true })
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: err.message || "Some error occurred while retrieving forms.",
-      });
-    });
-};
+ 
 exports.emailReport = async (req, res) => {
   let contact = req.body.contact;
   //contact = await Form.find({_id: contact._id}).lean();

@@ -35,3 +35,13 @@ export interface Tag
     id?: string;
     title?: string;
 }
+
+export interface PatientsPagination
+{
+    length: number;
+    size: number;
+    page: number;
+    lastPage: number;
+    startIndex: number;
+    endIndex: number;
+}

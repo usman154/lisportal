@@ -4,8 +4,8 @@ var transporter = nodemailer.createTransport({
   port: 465,
   secure: true, // use SSL
   auth: {
-    user: "mkcovid19testing@gmail.com",
-    pass: "Pakistan12345$",
+    user: "Moin@covid19testingcenter.info",
+    pass: "Pakistan1",
   },
 });
 

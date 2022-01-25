@@ -12,7 +12,6 @@ function createPdfs(contact) {
       if (err) {
         reject(err);
       }
-      console.log("pdf generated!");
       stream.pipe(fs.createWriteStream(path));
       resolve({ name: pdfName, path: path });
     });
@@ -65,7 +64,7 @@ function formatPdf(contact) {
   <body>
   <div style="width: 250px;
    margin: auto;">
-      <img style="width: 100%; height: auto;" src="http://3.13.232.58:8090/logo.png" />
+      <img style="width: 100%; height: auto;" src="https://mkcovid19.com/logo.png" />
    </div>
   
   
@@ -74,7 +73,7 @@ function formatPdf(contact) {
      <th colspan="3">Client: ${contact.location} </th>
   </tr>
   <tr>
-     <td>Client Code: OUT</td>
+     <td>Client Code: </td>
      <td colspan="2">Supervised By: Manager on duty</td>
 
   </tr>
@@ -90,7 +89,7 @@ function formatPdf(contact) {
         <table style="width: 100%;height: 300px;">
            <tr style="background-color: #bdd8f7;">
               <th colspan="3">Patient: ${
-                contact.last_name + "," + contact.first_name
+                contact.last_name + ", " + contact.first_name
               } </th>
            </tr>
            <tr>
@@ -105,10 +104,7 @@ function formatPdf(contact) {
               <td>Gender: ${contact.gender}</td>
   
            </tr>
-           <tr>
-              <td colspan="2">Unit: </td>
-              <td>Room:</td>
-           </tr>
+           
            <tr>
               <td colspan="3">
                  Phone: ${contact.phone_number.full}
@@ -153,11 +149,7 @@ function formatPdf(contact) {
               </td>
   
            </tr>
-           <tr>
-              <td colspan="3"></td>
-               
-  
-           </tr>
+           
            <tr>
               <td colspan="3">Specimen Type: NASAL SWAB </td>
            </tr>
@@ -192,7 +184,7 @@ function formatPdf(contact) {
      to perform testing on human clinical specimens.
      </p>
   
-     <footer style="margin-top: 100px;">
+     <footer style="position: absolute; bottom: 0;">
         <p>
            <strong>CLIA ID# 14D22 38829</strong>
         </p>

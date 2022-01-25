@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AuthService } from 'app/core/auth/auth.service';
 import { AuthUtils } from 'app/core/auth/auth.utils';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor
@@ -11,7 +12,7 @@ export class AuthInterceptor implements HttpInterceptor
     /**
      * Constructor
      */
-    constructor(private _authService: AuthService)
+    constructor(private _authService: AuthService, public _snackBar: MatSnackBar)
     {
     }
 
@@ -54,7 +55,9 @@ export class AuthInterceptor implements HttpInterceptor
                     // Reload the app
                     location.reload();
                 }
-
+                this._snackBar.open('System can not process the request','Close' ,{
+                    panelClass: ['mat-toolbar', 'mat-warn']
+                });
                 return throwError(error);
             })
         );

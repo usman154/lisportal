@@ -60,6 +60,10 @@ export class NavigationMockApi
                 });
 
                 // Fill horizontal navigation children using the default navigation
+                let userData :any = localStorage.getItem('userData');
+                if(userData){
+                    userData = JSON.parse(userData);
+                }
                 this._horizontalNavigation.forEach((horizontalNavItem) => {
                     this._defaultNavigation.forEach((defaultNavItem) => {
                         if ( defaultNavItem.id === horizontalNavItem.id )
@@ -68,15 +72,16 @@ export class NavigationMockApi
                         }
                     });
                 });
+               
 
                 // Return the response
                 return [
                     200,
                     {
-                        compact   : cloneDeep(this._compactNavigation),
-                        default   : cloneDeep(this._defaultNavigation),
-                        futuristic: cloneDeep(this._futuristicNavigation),
-                        horizontal: cloneDeep(this._horizontalNavigation)
+                        compact   : cloneDeep(userData.email == 'admin@mkcovid19.com' ? this._compactNavigation : []),
+                        default   : cloneDeep(userData.email == 'admin@mkcovid19.com' ? this._defaultNavigation : []),
+                        futuristic: cloneDeep(userData.email == 'admin@mkcovid19.com' ? this._futuristicNavigation : []),
+                        horizontal: cloneDeep(userData.email == 'admin@mkcovid19.com' ? this._horizontalNavigation : [])
                     }
                 ];
             });

@@ -14,4 +14,4 @@ export class AppComponent
     {
     }
 }
-(<any>window).appBaseUrl = 'http://localhost:8090/api';
+(<any>window).appBaseUrl = 'https://mkcovid19.com/api';

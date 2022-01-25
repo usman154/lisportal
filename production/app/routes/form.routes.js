@@ -11,8 +11,7 @@ module.exports = (app) => {
   // Retrieve all forms
   router.get("/", forms.findAll);
 
-  // Retrieve all published forms
-  router.get("/published", forms.findAllPublished);
+ 
 
   // Retrieve a single form with id
   router.get("/:id", forms.findOne);
@@ -23,10 +22,11 @@ module.exports = (app) => {
   // Delete a form with id
   router.delete("/:id", forms.delete);
 
-  // Create a new form
-  router.delete("/", forms.deleteAll);
+  // // delete multiple forms
+  // router.delete("/", forms.deleteAll);
   // Email Report
   router.post("/emailReport", forms.emailReport);
-
+ // Date range
+ 
   app.use("/api/forms", router);
 };

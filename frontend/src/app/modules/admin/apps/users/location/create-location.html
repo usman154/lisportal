@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Create Location</h1>
+<div mat-dialog-content>
+
+    <div class="mt-8">
+        <mat-form-field class="fuse-mat-no-subscript w-full">
+            <mat-label>Location</mat-label>
+            <mat-icon matPrefix class="hidden sm:flex icon-size-5" [svgIcon]="'heroicons_solid:office-building'">
+            </mat-icon>
+            <input matInput [placeholder]="'Location'" [(ngModel)]="data.location" [spellcheck]="false">
+        </mat-form-field>
+    </div>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button [mat-dialog-close]="data.location" cdkFocusInitial>Ok</button>
+</div>
